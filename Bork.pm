@@ -12,20 +12,20 @@ use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $VERSION);
 %EXPORT_TAGS = ( 'all' => [ 'bork' ] );
 @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
-my %map = ( tion => 'shun',
-            the  => 'zee',
+my %map = ( tion => 'shun', # tail only
+            the  => 'zee',  # full match
             an   => 'un',
             au   => 'oo',
-            en   => 'ee',
+            en   => 'ee', # tail only
             ir   => 'ur',
             ow   => 'oo',
-            E    => 'I',
-            e    => 'ea',
+#           E    => 'I',  # head only
+            e    => 'ea', # tail only
             f    => 'ff',
-            i    => 'ee',
-            o    => 'u',
+#           i    => 'ee', # first in word
+            o    => 'u',  # within word
             u    => 'oo',
             v    => 'f',
             w    => 'v',
@@ -38,8 +38,16 @@ sub new {
 
 sub bork {
    local $_ = shift;
-   s/\b(\w)(\w+)/\u$1\L$2/g;
-   s/(tion|\bthe\b|an|au|en\b|ir|ow|\bE|e\b|f|i|\Bo\B|u|v|w)/$map{$1}/g;
+   local $_ = shift if ref($_);
+   
+   s/(tion\b|\bthe\b|an|au|en\b|ir|ow|e\b|f|\Bo\B|u|v|w)/my $trans = $map{lc $1}; $1 eq lc($1) ? $map{lc $1} : ucfirst($map{lc $1})/eig;
+
+   # first i in a word
+   s/(i)(\S+)/ $1 eq 'i' ? "ee$2" : "Ee$2" /eig;
+
+   # leading e
+   s/\b(e)(?!e)/ $1 eq 'e' ? 'i' : 'I' /eig;
+
    s/([.!?])+/$1  Bork Bork Bork!/g;
    return $_;
 }

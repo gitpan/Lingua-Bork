@@ -1,5 +1,15 @@
 Revision history for Perl extension Lingua::Bork.
 
+0.03  Wed Feb 19
+        - made 'i' substitution follow first-in-word rule
+        - took out title-case code, letters now match the case they
+          were originally in
+        - leading 'ee' will not be processed, following that in most
+          cases a leading 'ee' had been tranformed from an 'i'
+          online enchefinator follows the same rule
+        - oo style calls now work
+          Bork Bork Bork!
+
 0.02  Tue Feb 18
         - forgot a semicolon and was testing off wrong version.
           Bork Bork Bork!
