@@ -1,0 +1,6 @@
+Revision history for Perl extension Lingua::Bork.
+
+0.01  Tue Feb 18 21:19:29 2003
+	- original version; created by h2xs 1.21 with options
+		-X -n Lingua::Bork
+
