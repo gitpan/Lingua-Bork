@@ -5,14 +5,14 @@ use warnings;
 
 require Exporter;
 
-use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $VERSION)
+use vars qw(@ISA %EXPORT_TAGS @EXPORT_OK $VERSION);
 
 @ISA = qw(Exporter);
 
 %EXPORT_TAGS = ( 'all' => [ 'bork' ] );
 @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 my %map = ( tion => 'shun',
             the  => 'zee',
